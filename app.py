@@ -79,8 +79,9 @@ def userview(username):
     if not output:
         user_key = user_key_for_username(username)
         if user_key == 0:
-            return "Unknown user"
-
+            output = ("Unknown user", 404)
+            cache_set(view_cachekey, output, 3600)
+            return output
         try:
             artist_key_set = artists_in_user_collection(user_key)
         except:

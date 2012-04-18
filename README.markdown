@@ -40,6 +40,7 @@ since I'm already using that one. ;) )
     heroku create radiowut --stack cedar
     heroku config:add RDIO_KEY=your_api_key_here
     heroku config:add RDIO_SHARED_SECRET=your_shared_secret_here
+    #heroku config:add GA_ANALYTICS_ID=only_if_you_want_to
     heroku addons:add memcache
     git push heroku master
 

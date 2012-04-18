@@ -12,7 +12,7 @@ def index():
             url_for('userview', username=username),
         )
 
-    return """
+    return """<!doctype html><html><head><meta charset="utf-8">"""+analytics_code()+"""</head><body>
         <h1>Anything new by the artists I listen to?</h1>
         <p>Tired of sifting through Rdio's "New Releases" tab? Find the latest releases
         for <i>just</i> the artists in your collection:</p>
@@ -29,6 +29,28 @@ from cacheutil import cache_get, cache_set
 from radiowut import (user_key_for_username, artists_in_user_collection,
     get_new_releases)
 
+
+def analytics_code():
+    try:
+        ga_id = os.environ.get('GA_ANALYTICS_ID', None)
+    except:
+        ga_id = None
+
+    if not ga_id:
+        return ""
+
+    return """<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '%s'], ['_trackPageview'], ['_setSiteSpeedSampleRate', 100]);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>""" % ga_id
+
+
 @app.route('/<username>/')
 def userview(username):
     new_username = username[:100].lower().strip()
@@ -37,7 +59,7 @@ def userview(username):
             url_for('userview', username=new_username),
         )
 
-    view_cachekey = "userview3(username=%s)" % username
+    view_cachekey = "userview4(username=%s)" % username
     output = cache_get(view_cachekey)
     if not output:
         user_key = user_key_for_username(username)
@@ -55,7 +77,8 @@ def userview(username):
             lambda release: release.get("artistKey", "").split("|", 1)[0] in artist_key_set,
             new_releases
         )
-        output = """<p>New releases (past two weeks) for artists in <b><a href="http://www.rdio.com/people/%s/">%s</a></b>'s <a href="http://www.rdio.com/people/%s/collection/">collection</a>:</p><hr>""" % (
+        output = """<!doctype html><html><head><meta charset="utf-8">"""+analytics_code()+"""</head><body>"""
+        output += """<p>New releases (past two weeks) for artists in <b><a href="http://www.rdio.com/people/%s/">%s</a></b>'s <a href="http://www.rdio.com/people/%s/collection/">collection</a>:</p><hr>""" % (
             escape(username),
             escape(username),
             escape(username)

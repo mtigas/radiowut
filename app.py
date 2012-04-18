@@ -13,11 +13,14 @@ def index():
         )
 
     return """
-        <h1>What's new for my Rdio collection?</h1>
+        <h1>Anything new by the artists I listen to?</h1>
+        <p>Tired of sifting through Rdio's "New Releases" tab? Find the latest releases
+        for <i>just</i> the artists in your collection:</p>
         <form action="" method="get">
         Rdio Username: <input type="text" name="username" placeholder="my-rdio-username"/><br>
         <input type="submit" value="Submit"/>
         </form>
+        <p>(This should <a href="https://twitter.com/idangazit/status/191800690732044290">really be a feature in Rdio proper</a>, eh?)</p>
         <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>&copy; 2012 Mike Tigas; <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>
     """
 

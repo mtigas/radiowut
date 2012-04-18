@@ -1,11 +1,24 @@
 import os
 
-from flask import Flask
+from flask import Flask, request, redirect, url_for, escape
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Hello World!'
+    username = request.args.get('username', '')
+    if username:
+        username = escape(username[:100].replace(" ","-").lower().strip())
+        return redirect(
+            url_for('userview', username=username),
+        )
+
+    return """
+        <h1>What's new for my Rdio collection?</h1>
+        <form action="" method="get">
+        Rdio Username: <input type="text" name="username" placeholder="my-rdio-username"/><br>
+        <input type="submit" value="Submit"/>
+        </form>
+    """
 
 ###########################################################################
 from cacheutil import cache_get, cache_set
@@ -14,6 +27,12 @@ from radiowut import (user_key_for_username, artists_in_user_collection,
 
 @app.route('/<username>/')
 def userview(username):
+    new_username = username[:100].lower().strip()
+    if username != new_username:
+        return redirect(
+            url_for('userview', username=new_username),
+        )
+
     view_cachekey = "userview(username=%s)" % username
     output = cache_get(view_cachekey)
     if not output:
@@ -32,8 +51,10 @@ def userview(username):
             lambda release: release.get("artistKey", "").split("|", 1)[0] in artist_key_set,
             new_releases
         )
-        output = """<p>New releases (past two weeks) for artists in <b>%s</b>'s collection:</p><hr>""" % (
-            username
+        output = """<p>New releases (past two weeks) for artists in <b><a href="http://rdio.com/people/%s">%s</a></b>'s <a href="http://rdio.com/people/%s/collection/">collection</a>:</p><hr>""" % (
+            escape(username),
+            escape(username),
+            escape(username)
         )
         for release in user_new_releases:
             output += """
@@ -52,7 +73,7 @@ def userview(username):
                 release['artist'],
                 release['displayDate']
             )
-        cache_set(view_cachekey, output, 1800)
+        cache_set(view_cachekey, output, 21600)
 
     return output
 

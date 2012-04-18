@@ -56,10 +56,14 @@ def artists_in_user_collection(user_key):
     return artist_key_set
 
 def get_new_releases():
-    releases_cachekey = "new_releases2()"
-    new_releases_result = cache_get(releases_cachekey)
-    if not new_releases_result:
+    releases_cachekey = "new_releases3()"
+    new_releases = cache_get(releases_cachekey)
+    if not new_releases:
         r = get_rdio()
-        new_releases_result = r.getNewReleases()
-        cache_set(releases_cachekey, new_releases_result, 1800)
-    return new_releases_result
+        new_releases = []
+        #new_releases += r.getNewReleases()
+        new_releases += r.getNewReleases(time="thisweek")
+        new_releases += r.getNewReleases(time="lastweek")
+        new_releases += r.getNewReleases(time="twoweeks")
+        cache_set(releases_cachekey, new_releases, 21600)
+    return new_releases

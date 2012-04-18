@@ -19,7 +19,7 @@ def index():
             301
         )
 
-    return """<!doctype html><html><head><meta charset="utf-8">"""+analytics_code()+"""</head><body>
+    return """<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">"""+analytics_code()+"""</head><body>
         <h1>Anything new by the artists I listen to?</h1>
         <p>Tired of sifting through Rdio's "New Releases" tab? Find the latest releases
         for <i>just</i> the artists in your collection:</p>
@@ -28,7 +28,7 @@ def index():
         <input type="submit" value="Submit"/>
         </form>
         <p>(This should <a href="https://twitter.com/idangazit/status/191800690732044290">really be a feature in Rdio proper</a>, eh?)</p>
-        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>&copy; 2012 Mike Tigas; <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>
+        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>2012 Mike Tigas - <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>
     """
 
 ###########################################################################
@@ -92,7 +92,7 @@ def userview(username):
             lambda release: release.get("artistKey", "").split("|", 1)[0] in artist_key_set,
             new_releases
         )
-        output = """<!doctype html><html><head><meta charset="utf-8">"""+analytics_code()+"""</head><body>"""
+        output = """<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="robots" content="noindex, follow">"""+analytics_code()+"""</head><body>"""
         output += """<p>New releases (past two weeks) for artists in <b><a href="http://www.rdio.com/people/%s/">%s</a></b>'s <a href="http://www.rdio.com/people/%s/collection/">collection</a>:</p><hr>""" % (
             escape(username),
             escape(username),
@@ -116,7 +116,7 @@ def userview(username):
                 release['displayDate']
             )
         output += """<br style="clear:both"><hr>
-        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>&copy; 2012 Mike Tigas; <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>"""
+        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>2012 Mike Tigas - <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>"""
         cache_set(view_cachekey, output, 21600)
 
     return output
@@ -126,4 +126,9 @@ def userview(username):
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
+
+    from werkzeug import SharedDataMiddleware
+    app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+      '/': os.path.join(os.path.dirname(__file__), 'static')
+    })
     app.run(host='0.0.0.0', port=port)

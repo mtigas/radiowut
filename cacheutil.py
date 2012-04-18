@@ -11,7 +11,11 @@ from hashlib import md5
 import os
 import zlib
 from base64 import b64encode, b64decode
-import pylibmc
+try:
+    import pylibmc
+except:
+    pylibmc = None
+    import memcache
 import threading
 _locals = threading.local()
 
@@ -44,7 +48,10 @@ def get_cache_client():
             binary=True
         )
     else:
-        client = pylibmc.Client(servers=['127.0.0.1:55838'], binary=True)
+        if pylibmc:
+            client = pylibmc.Client(servers=['127.0.0.1:55838'], binary=True)
+        else:
+            client = memcache.Client(['127.0.0.1:55838'], debug=0)
 
     _locals.cache_client = client
     return client

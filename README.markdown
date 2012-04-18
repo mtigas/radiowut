@@ -1,7 +1,17 @@
+## fun rdio bits
+
 Currently:
 
 * A page that displays only the new releases for artists in a given user's
   collection.
+
+**CAVEAT**: I am still *just* learning both [Flask](http://flask.pocoo.org/)
+and the [Rdio API](http://developer.rdio.com/). This is a totally incomplete
+scratchpad-ish project.
+
+TODO: l2 flask/jinja template because [this is currently super stupid][dumb]
+
+[dumb]: https://github.com/mtigas/radiowut/blob/master/app.py#L15
 
 ## Instructions
 

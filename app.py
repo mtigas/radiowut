@@ -18,6 +18,7 @@ def index():
         Rdio Username: <input type="text" name="username" placeholder="my-rdio-username"/><br>
         <input type="submit" value="Submit"/>
         </form>
+        <p><a href="https://github.com/mtigas/radiowut">this project is on github</a></p>
     """
 
 ###########################################################################
@@ -33,7 +34,7 @@ def userview(username):
             url_for('userview', username=new_username),
         )
 
-    view_cachekey = "userview(username=%s)" % username
+    view_cachekey = "userview1(username=%s)" % username
     output = cache_get(view_cachekey)
     if not output:
         user_key = user_key_for_username(username)
@@ -73,6 +74,7 @@ def userview(username):
                 release['artist'],
                 release['displayDate']
             )
+        output += """<br style="clear:both"><hr><p><a href="https://github.com/mtigas/radiowut">this project is on github</a></p>"""
         cache_set(view_cachekey, output, 21600)
 
     return output

@@ -18,7 +18,7 @@ def index():
         Rdio Username: <input type="text" name="username" placeholder="my-rdio-username"/><br>
         <input type="submit" value="Submit"/>
         </form>
-        <p><a href="https://github.com/mtigas/radiowut">this project is on github</a></p>
+        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>&copy; 2012 Mike Tigas; <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>
     """
 
 ###########################################################################
@@ -34,7 +34,7 @@ def userview(username):
             url_for('userview', username=new_username),
         )
 
-    view_cachekey = "userview1(username=%s)" % username
+    view_cachekey = "userview3(username=%s)" % username
     output = cache_get(view_cachekey)
     if not output:
         user_key = user_key_for_username(username)
@@ -52,7 +52,7 @@ def userview(username):
             lambda release: release.get("artistKey", "").split("|", 1)[0] in artist_key_set,
             new_releases
         )
-        output = """<p>New releases (past two weeks) for artists in <b><a href="http://rdio.com/people/%s">%s</a></b>'s <a href="http://rdio.com/people/%s/collection/">collection</a>:</p><hr>""" % (
+        output = """<p>New releases (past two weeks) for artists in <b><a href="http://www.rdio.com/people/%s/">%s</a></b>'s <a href="http://www.rdio.com/people/%s/collection/">collection</a>:</p><hr>""" % (
             escape(username),
             escape(username),
             escape(username)
@@ -60,21 +60,22 @@ def userview(username):
         for release in user_new_releases:
             output += """
             <div style="width:220px;height:300px;text-align:center;padding:10px;margin:10px;float:left;overflow-y:auto">
-                <a href="%s"><img src="%s" alt="%s album cover"/></a><br>
-                <a href="%s"><b>%s</b></a><br>
-                <a href="http://rdio.com/#%s"><i>%s</i></a><br>
+                <a href="http://www.rdio.com%s"><img src="%s" alt="%s album cover"/></a><br>
+                <a href="http://www.rdio.com%s"><b>%s</b></a><br>
+                <a href="http://www.rdio.com%s"><i>%s</i></a><br>
                 Released %s
             </div>""" % (
-                release['embedUrl'],
+                release['url'],
                 release['icon'],
                 release['name'],
-                release['embedUrl'],
+                release['url'],
                 release['name'],
                 release['artistUrl'],
                 release['artist'],
                 release['displayDate']
             )
-        output += """<br style="clear:both"><hr><p><a href="https://github.com/mtigas/radiowut">this project is on github</a></p>"""
+        output += """<br style="clear:both"><hr>
+        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>&copy; 2012 Mike Tigas; <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>"""
         cache_set(view_cachekey, output, 21600)
 
     return output

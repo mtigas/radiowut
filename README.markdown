@@ -9,10 +9,6 @@ Currently:
 and the [Rdio API](http://developer.rdio.com/). This is a totally incomplete
 scratchpad-ish project.
 
-TODO: l2 flask/jinja template because [this is currently super stupid][dumb]
-
-[dumb]: https://github.com/mtigas/radiowut/blob/master/app.py#L15
-
 ## Instructions
 
 * Hit up the [Rdio Developers Site](http://developer.rdio.com/) and see the
@@ -46,3 +42,13 @@ since I'm already using that one. ;) )
     heroku config:add RDIO_SHARED_SECRET=your_shared_secret_here
     heroku addons:add memcache
     git push heroku master
+
+---
+
+TODO:
+
+* l2 flask/jinja template because [this is currently super stupid][dumb]
+* lmao "[various artists][various]" is an artist so i need to filter that out
+
+[dumb]: https://github.com/mtigas/radiowut/blob/master/app.py#L15
+[various]: https://d2p12wh0p3fo1n.cloudfront.net/files/20120417/variousartists.png

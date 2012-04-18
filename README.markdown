@@ -5,10 +5,10 @@ Currently:
 
 ## Instructions
 
-* Hit up the (Rdio Developers Site)(http://developer.rdio.com/) and see the
+* Hit up the [Rdio Developers Site](http://developer.rdio.com/) and see the
   **how to get started** portion. Register there and grab an "API key" and
   "API shared secret".
-* Get an account with (Heroku)(https://www.heroku.com/).
+* Get an account with [Heroku](https://www.heroku.com/).
 
 Start a local python project like so. (I like to put my projects in a `~/Code`
 directory. You can change that to whatever.)

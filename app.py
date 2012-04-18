@@ -8,13 +8,14 @@ def index():
     return 'Hello World!'
 
 ###########################################################################
+from cacheutil import cache_get, cache_set
 from radiowut import (user_key_for_username, artists_in_user_collection,
     get_new_releases)
 
 @app.route('/<username>/')
 def userview(username):
     view_cachekey = "userview(username=%s)" % username
-    output = cache_get(u_cachekey)
+    output = cache_get(view_cachekey)
     if not output:
         user_key = user_key_for_username(username)
         if user_key == 0:

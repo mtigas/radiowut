@@ -1,14 +1,13 @@
 import os
-
 from flask import Flask, request, redirect, url_for, escape
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
     if ("//radiowut.herokuapp.com/" in request.url_root
-        and not request.url_root.startswith("https://radiowut.herokuapp.com/")
-    ):
+    and request.headers.get("X-Forwarded-Proto", "http") != "https"):
         return redirect("https://radiowut.herokuapp.com/", 301)
 
     username = request.args.get('username', '')
@@ -62,9 +61,11 @@ def analytics_code():
 @app.route('/<username>/')
 def userview(username):
     if ("//radiowut.herokuapp.com/" in request.url_root
-        and not request.url_root.startswith("https://radiowut.herokuapp.com/")
-    ):
-        return redirect("https://radiowut.herokuapp.com" + url_for('userview', username=(username)), 301)
+    and request.headers.get("X-Forwarded-Proto", "http") != "https"):
+        return redirect(
+            "https://radiowut.herokuapp.com%s" % url_for('userview', username=(username)),
+            301
+        )
 
     new_username = username[:100].lower().strip()
     if username != new_username:

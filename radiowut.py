@@ -44,11 +44,15 @@ def user_key_for_username(username):
     return user_key
 
 def artists_in_user_collection(user_key):
-    user_artists_cachekey = "user_artists2(user_key=%s)" % user_key
+    user_artists_cachekey = "user_artists3(user_key=%s)" % user_key
     artist_key_set = cache_get(user_artists_cachekey)
     if not artist_key_set:
         r = get_rdio()
         artist_result = r.getArtistsInCollection(user=user_key)
+        artist_result = filter(
+            lambda artist: artist['artistKey'] != "r62",
+            artist_result
+        )
         artist_key_set = frozenset([
             artist.get("artistKey", "") for artist in artist_result
         ])

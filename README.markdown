@@ -48,7 +48,5 @@ since I'm already using that one. ;) )
 TODO:
 
 * l2 flask/jinja template because [this is currently super stupid][dumb]
-* lmao "[various artists][various]" is an artist so i need to filter that out
 
 [dumb]: https://github.com/mtigas/radiowut/blob/master/app.py#L15
-[various]: https://d2p12wh0p3fo1n.cloudfront.net/files/20120417/variousartists.png

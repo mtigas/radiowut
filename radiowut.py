@@ -44,22 +44,22 @@ def user_key_for_username(username):
     return user_key
 
 def artists_in_user_collection(user_key):
-    user_artists_cachekey = "user_artists(user_key=%s)" % user_key
+    user_artists_cachekey = "user_artists2(user_key=%s)" % user_key
     artist_key_set = cache_get(user_artists_cachekey)
     if not artist_key_set:
         r = get_rdio()
         artist_result = r.getArtistsInCollection(user=user_key)
         artist_key_set = frozenset([
-            artist['artistKey'] for artist in artist_result
+            artist.get("artistKey", "") for artist in artist_result
         ])
         cache_set(user_artists_cachekey, artist_key_set, 86400)
     return artist_key_set
 
 def get_new_releases():
-    releases_cachekey = "new_releases()"
+    releases_cachekey = "new_releases2()"
     new_releases_result = cache_get(releases_cachekey)
     if not new_releases_result:
         r = get_rdio()
-        new_releases_result = r.getNewReleases(time="twoweeks")
+        new_releases_result = r.getNewReleases()
         cache_set(releases_cachekey, new_releases_result, 1800)
     return new_releases_result

@@ -22,11 +22,11 @@ directory. You can change that to whatever.)
     source bin/activate
 
     git clone git://github.com/mtigas/radiowut.git repo
-
     cd repo
-    
-You should be able to run `python app.py`. (You will probably actually need a
-local memcached installation too.)
+    pip install -r requirements.txt
+
+You should be able to run `python app.py`. (Caveat: actually, you'll probably
+also need a local memcached installation to go with it.)
 
 To deploy into Heroku: (You will need to change the app name from `radiowut`
 since I'm already using that one. ;) )

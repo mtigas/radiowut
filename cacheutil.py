@@ -1,3 +1,5 @@
+# aka OVERKILL.PY
+#
 # Some fun utilities to serialize python data into compressed strings.
 # Need this because a) memcached has a 1MB datasize limit and b) memcached
 # requires plain, ASCII-only strings.

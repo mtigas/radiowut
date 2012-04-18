@@ -36,7 +36,7 @@ def userview(username):
         <div style="width:220px;height:300px;text-align:center;padding:10px;margin:10px;float:left;overflow-y:auto">
             <a href="%s"><img src="%s" alt="%s album cover"/></a><br>
             <a href="%s"><b>%s</b></a><br>
-            <a href="http://rdio.com/%s"><i>%s</i></a><br>
+            <a href="http://rdio.com/#%s"><i>%s</i></a><br>
             Released %s
         </div>""" % (
             release['embedUrl'],

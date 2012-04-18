@@ -3,13 +3,21 @@ import os
 from flask import Flask, request, redirect, url_for, escape
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
+    if ("//radiowut.herokuapp.com/" in request.url_root
+        and not request.url_root.startswith("https://radiowut.herokuapp.com/")
+    ):
+        return redirect("https://radiowut.herokuapp.com/", 301)
+
     username = request.args.get('username', '')
     if username:
         username = escape(username[:100].replace(" ","-").lower().strip())
+
         return redirect(
             url_for('userview', username=username),
+            301
         )
 
     return """<!doctype html><html><head><meta charset="utf-8">"""+analytics_code()+"""</head><body>
@@ -53,10 +61,16 @@ def analytics_code():
 
 @app.route('/<username>/')
 def userview(username):
+    if ("//radiowut.herokuapp.com/" in request.url_root
+        and not request.url_root.startswith("https://radiowut.herokuapp.com/")
+    ):
+        return redirect("https://radiowut.herokuapp.com" + url_for('userview', username=(username)), 301)
+
     new_username = username[:100].lower().strip()
     if username != new_username:
         return redirect(
             url_for('userview', username=new_username),
+            301
         )
 
     view_cachekey = "userview4(username=%s)" % username

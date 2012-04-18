@@ -28,7 +28,7 @@ def index():
         <input type="submit" value="Submit"/>
         </form>
         <p>(This should <a href="https://twitter.com/idangazit/status/191800690732044290">really be a feature in Rdio proper</a>, eh?)</p>
-        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>2012 Mike Tigas - <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>
+        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>2012 Mike Tigas - <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://click.linksynergy.com/fs-bin/click?id=6P4Cgxrxf*M&amp;subid=&amp;offerid=221756.1&amp;type=10&amp;tmpid=7950&amp;RD_PARM1=http%253A%252F%252Fwww.rdio.com%252Fpeople%252Fmtigas%252F">rdio</a></p>
     """
 
 ###########################################################################
@@ -117,7 +117,7 @@ def userview(username):
                 release['displayDate']
             )
         output += """<br style="clear:both"><hr>
-        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>2012 Mike Tigas - <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://www.rdio.com/people/mtigas/">rdio</a></p>"""
+        <p><a href="https://github.com/mtigas/radiowut">This project is on GitHub</a>.<br>2012 Mike Tigas - <a href="http://mike.tig.as/">web</a>, <a href="https://twitter.com/mtigas">twitter</a>, <a href="http://click.linksynergy.com/fs-bin/click?id=6P4Cgxrxf*M&amp;subid=&amp;offerid=221756.1&amp;type=10&amp;tmpid=7950&amp;RD_PARM1=http%253A%252F%252Fwww.rdio.com%252Fpeople%252Fmtigas%252F">rdio</a></p>"""
         cache_set(view_cachekey, output, 21600)
 
     return output

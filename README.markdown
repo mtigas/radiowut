@@ -41,7 +41,8 @@ since I'm already using that one. ;) )
     heroku config:add RDIO_KEY=your_api_key_here
     heroku config:add RDIO_SHARED_SECRET=your_shared_secret_here
     #heroku config:add GA_ANALYTICS_ID=only_if_you_want_to
-    heroku addons:add memcache
+    #heroku addons:add memcache # only 5MB free
+    heroku addons:add memcachier:25
     git push heroku master
 
 ---

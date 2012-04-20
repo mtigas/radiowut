@@ -7,11 +7,71 @@
 {# TODO: make this not suck super bad #}
 <style>
 .album-button {
+    padding:10px;
+    margin:0 10px 15px 0;
+}
+.album-button p {
+    margin:0;
+    padding:0;
+}
+
+@media (max-width: 768px) {
+    #albums {
+        width: 515px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    #albums {
+        width: 260px;
+        margin: 0 auto;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 980px) {
+    #albums {
+        width: 720px;
+        margin-left: 8px;
+    }
+    .album-button {
+        margin:0 5px 15px 0;
+        padding:10px 5px;
+    }
+}
+@media (min-width: 980px) and (max-width: 1200px) {
+    #albums {
+        width: 930px;
+        margin-left: 10px;
+    }
+    .album-button {
+        margin:0 10px 15px 0;
+        padding:10px 0;
+    }
+    .album-button p {
+        margin:0 10px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #albums {
+        width: 1160px;
+        margin-left: 10px;
+    }
+    .album-button {
+        padding:10px 0;
+        margin:0 10px 15px 0;
+    }
+    .album-button p {
+        margin:0 10px;
+    }
+}
+
+.album-button {
     width:220px;
     height:300px;
     text-align:center;
-    padding:10px 5px;
-    margin:0 5px 10px 0;
     float:left;
     overflow-y:auto;
     background-color:#fafafa;
@@ -61,8 +121,6 @@
     opacity:1;
     filter:alpha(opacity = 100);
 }
-
-
 </style>
 {% endblock %}
 
@@ -74,14 +132,18 @@
 
 <hr>
 
+<div id="albums">
 {% for release in user_new_releases %}
 <div class="album-button well">
     <a href="http://www.rdio.com{{ release['url'] }}"><img src="{{ release['icon'] }}" alt="{{ release['name'] }} album cover"/></a><br>
+    <p>
     <a href="http://www.rdio.com{{ release['url'] }}"><b>{{ release['name'] }}</b></a><br>
     <a href="http://www.rdio.com{{ release['artistUrl'] }}"><i>{{ release['artist'] }}</i></a><br>
     Released {{ release['displayDate'] }}
+    </p>
 </div>
 {% endfor %}
+</div>
 
 <br style="clear:both">
 {% endblock %}

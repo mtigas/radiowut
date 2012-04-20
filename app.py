@@ -49,7 +49,7 @@ def userview(username):
             301
         )
 
-    view_cachekey = "userview5(username=%s)" % username
+    view_cachekey = "userview6(username=%s)" % username
     output = cache_get(view_cachekey)
     if not output:
         user_key = user_key_for_username(username)

@@ -44,11 +44,3 @@ since I'm already using that one. ;) )
     #heroku addons:add memcache # only 5MB free
     heroku addons:add memcachier:25
     git push heroku master
-
----
-
-TODO:
-
-* l2 flask/jinja template because [this is currently super stupid][dumb]
-
-[dumb]: https://github.com/mtigas/radiowut/blob/master/app.py#L15

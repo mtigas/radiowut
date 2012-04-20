@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Collection New Releases{% endblock %}
+
+{% block content %}
+<h1>Anything new by the artists I listen to?</h1>
+
+<div style="margin:2em 0">
+<p>Tired of sifting through Rdio's "New Releases" tab? Find the latest releases
+for <i>just</i> the artists in your collection:</p>
+<form action="" method="get" class="form-inline">
+<label for="username">Rdio Username:</label> <input type="text" id="username" name="username" placeholder="my-rdio-username"/>&nbsp;<input class="btn btn-primary" type="submit" value="Submit"/>
+</form>
+</div>
+
+<p>(This should <a href="https://twitter.com/idangazit/status/191800690732044290">really be a feature in Rdio proper</a>, eh?)</p>
+{% endblock %}

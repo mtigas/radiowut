@@ -49,7 +49,7 @@ def userview(username):
             301
         )
 
-    view_cachekey = "userview6(username=%s)" % username
+    view_cachekey = "userview7(username=%s)" % username
     output = cache_get(view_cachekey)
     if not output:
         user_key = user_key_for_username(username)
@@ -73,7 +73,7 @@ def userview(username):
             user_new_releases=user_new_releases,
             google_analytics_id=google_analytics_id()
         )
-        cache_set(view_cachekey, output, 21600)
+        cache_set(view_cachekey, output, 900)
 
     return output
 

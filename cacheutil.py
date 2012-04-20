@@ -19,12 +19,10 @@ except:
 import threading
 _locals = threading.local()
 
-os.environ['MEMCACHE_SERVERS'] = os.environ.get('MEMCACHIER_SERVERS',
-    os.environ.get('MEMCACHE_SERVERS'))
-os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME',
-    os.environ.get('MEMCACHE_USERNAME'))
-os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD',
-    os.environ.get('MEMCACHE_PASSWORD'))
+if os.environ.get('MEMCACHIER_SERVERS', None):
+    os.environ['MEMCACHE_SERVERS'] = os.environ.get('MEMCACHIER_SERVERS')
+    os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME')
+    os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD')
 
 __all__ = [
     'get_cache_client',
